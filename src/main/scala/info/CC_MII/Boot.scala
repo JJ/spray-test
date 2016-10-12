@@ -7,6 +7,7 @@ import akka.pattern.ask
 import akka.util.Timeout
 import scala.concurrent.duration._
 
+
 object Boot extends App {
 
   // we need an ActorSystem to host our application in
@@ -16,8 +17,9 @@ object Boot extends App {
   val service = system.actorOf(Props[MyServiceActor], "demo-service")
 
   implicit val timeout = Timeout(5.seconds)
+  val port: Int =  if (sys.env.get("SPRAY_Port") != None) sys.env("SPRAY_Port").toInt else 8080
   // start a new HTTP server on port 8080 with our service actor as the handler
   IO(Http) ? Http.Bind(service, 
 		       interface = "localhost", 
-		       port = if sys.env("SPRAY_Port") then sys.env("SPRAY_Port") else 8080 )
+		       port = port )
 }
