@@ -1,6 +1,6 @@
-organization  := "com.example"
+organization  := "info.CC_MII"
 
-version       := "0.1"
+version       := "0.0.1"
 
 scalaVersion  := "2.11.6"
 
@@ -20,3 +20,5 @@ libraryDependencies ++= {
 }
 
 Revolver.settings
+
+cancelable in Global := true

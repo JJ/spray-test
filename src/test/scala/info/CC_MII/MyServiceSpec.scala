@@ -1,4 +1,4 @@
-package com.example
+package info.CC_MII
 
 import org.specs2.mutable.Specification
 import spray.testkit.Specs2RouteTest
@@ -12,7 +12,7 @@ class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
 
     "return a greeting for GET requests to the root path" in {
       Get() ~> myRoute ~> check {
-        responseAs[String] must contain("Say hello")
+        responseAs[String] must contain("Hola")
       }
     }
 
