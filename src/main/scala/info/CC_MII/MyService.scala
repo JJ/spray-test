@@ -1,4 +1,4 @@
-package com.example
+package info.CC_MII
 
 import akka.actor.Actor
 import spray.routing._
@@ -30,7 +30,7 @@ trait MyService extends HttpService {
           complete {
             <html>
               <body>
-                <h1>Say hello to <i>spray-routing</i> on <i>spray-can</i>!</h1>
+                <h1>Hola muy buenas</h1>
               </body>
             </html>
           }
