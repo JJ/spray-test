@@ -28,29 +28,6 @@ object MasterJsonProtocol extends DefaultJsonProtocol {
   implicit val apuestaFormat = jsonFormat3(Apuesta)
 }
 
-object ApuestaFormat extends JsonFormat[Apuesta] {
-    def write(obj: Apuesta): JsValue = {
-      JsObject(
-        ("local", JsNumber(obj.local)),
-        ("visitante", JsNumber(obj.visitante)),
-        ("quien", JsString(obj.quien))
-      )
-    }
-
-    def read(json: JsValue): Apuesta = json match {
-      case JsObject(fields)
-        if fields.isDefinedAt("local") & fields.isDefinedAt("visitante") & fields.isDefinedAt("quien") =>
-          new Apuesta(fields("local").convertTo[Int],
-		  fields("visitante").convertTo[Int],
-		  fields("quien").convertTo[String]
-		)
-
-      case _ => deserializationError("No es una apuesta")
-    }
-
-}
-
-import ApuestaFormat._
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
