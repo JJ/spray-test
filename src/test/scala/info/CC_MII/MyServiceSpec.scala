@@ -4,10 +4,7 @@ import org.specs2.mutable.Specification
 import spray.testkit.Specs2RouteTest
 import spray.http._
 import StatusCodes._
-import spray.json._
 import spray.httpx.SprayJsonSupport
-
-
 
 class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSupport with MyService {
   def actorRefFactory = system
