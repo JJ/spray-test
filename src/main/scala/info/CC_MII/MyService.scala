@@ -43,7 +43,7 @@ class MyServiceActor extends Actor with MyService {
   def receive = runRoute(myRoute)
 
   // Cada servidor lleva una porra
-  var apuestas = scala.collection.mutable.Map[String, Apuesta]()
+  private val apuestas = scala.collection.mutable.Map[String, Apuesta]()
 }
 
 
@@ -63,7 +63,7 @@ trait MyService extends HttpService {
     put {
       val apuesta = new Apuesta(local,visitante,quien)
       complete( apuesta )
-    }
+    } 
   }
   
 }
