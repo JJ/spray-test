@@ -1,30 +1,17 @@
-## _spray_ Template Project
+## ejemplo de uso de _spray_ Template Project
 
-This projects provides a starting point for your own _spray-routing_ endeavors.
-There are 8 branches, providing templates for _spray-routing_ on
+Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3
 
-* _spray-can_, Scala 2.9 + Akka 2.0 + spray 1.0 (the `on_spray-can_1.0` branch)
-* _spray-can_, Scala 2.10 + Akka 2.1 + spray 1.1 (the `on_spray-can_1.1` branch)
-* _spray-can_, Scala 2.10 + Akka 2.2 + spray 1.2 (the `on_spray-can_1.2` branch)
-* _spray-can_, Scala 2.10 + Akka 2.3 + spray 1.3 (the `on_spray-can_1.3` branch)
-* _spray-can_, Scala 2.11 + Akka 2.3 + spray 1.3 (the `on_spray-can_1.3_scala-2.11` branch)
-* _Jetty_, Scala 2.9 + Akka 2.0 + spray 1.0 (the `on_jetty_1.0` branch)
-* _Jetty_, Scala 2.10 + Akka 2.1 + spray 1.1 (the `on_jetty_1.1` branch)
-* _Jetty_, Scala 2.10 + Akka 2.2 + spray 1.2 (the `on_jetty_1.2` branch)
-* _Jetty_, Scala 2.10 + Akka 2.3 + spray 1.3 (the `on_jetty_1.3` branch)
-* _Jetty_, Scala 2.11 + Akka 2.3 + spray 1.3 (the `on_jetty_1.3_scala-2.11` branch)
-
-You are currently on the `on_spray-can_1.3_scala-2.11` branch.
 
 Follow these steps to get started:
 
 1. Git-clone this repository.
 
-        $ git clone git://github.com/spray/spray-template.git my-project
+        $ git clone git://github.com/JJ/spray-test my-project
 
 2. Change directory into your clone:
 
-        $ cd my-project
+        $ cd my-proyect
 
 3. Launch SBT:
 
@@ -39,6 +26,42 @@ Follow these steps to get started:
         > re-start
 
 6. Browse to [http://localhost:8080](http://localhost:8080/)
+
+
+8. Ejecuta una serie de pruebas:
+
+```
+$ curl http://localhost:8080
+["routes", "get,post"]
+
+$ curl -X PUT http://localhost:8080/0/0/Uno 
+{
+  "local": 0,
+  "visitante": 0,
+  "quien": "Uno"
+}
+
+$ curl -X PUT http://localhost:8080/0/1/Otro
+{
+  "local": 0,
+  "visitante": 1,
+  "quien": "Otro"
+}                                                                              
+
+$ curl -X PUT http://localhost:8080/3/1/Aquel
+{
+  "local": 3,
+  "visitante": 1,
+  "quien": "Aquel"
+}                                                                              
+
+$ curl http://localhost:8080/Aquel     
+{
+  "local": 3,
+  "visitante": 1,
+  "quien": "Aquel"
+}
+```
 
 7. Stop the application:
 
