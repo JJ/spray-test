@@ -1,9 +1,19 @@
 package info.CC_MII
 
+import scala.collection.mutable.Map
+
 import akka.actor.Actor
+
 import spray.routing._
 import spray.http._
+import spray.json._
+import spray.httpx.SprayJsonSupport._
+
 import MediaTypes._
+
+import info.CC_MII._
+
+import DefaultJsonProtocol._ 
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
@@ -17,6 +27,9 @@ class MyServiceActor extends Actor with MyService {
   // other things here, like request stream processing
   // or timeout handling
   def receive = runRoute(myRoute)
+
+  // Cada servidor lleva una porra
+  var apuestas = scala.collection.mutable.Map[String, Apuesta]()
 }
 
 
@@ -24,17 +37,9 @@ class MyServiceActor extends Actor with MyService {
 trait MyService extends HttpService {
 
   val myRoute =
-    path("") {
-      get {
-        respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
-          complete {
-            <html>
-              <body>
-                <h1>Hola muy buenas</h1>
-              </body>
-            </html>
-          }
-        }
+    get {
+      pathSingleSlash {
+        complete ( "routes" -> "get,post")
       }
     }
 }
