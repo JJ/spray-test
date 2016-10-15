@@ -26,6 +26,13 @@ class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSup
       }
     }
 
+    "GET recupera apuesta correctamente" in {
+      Get("/Alguien") ~> myRoute ~> check {
+	response.entity should not be equalTo(None)
+	responseAs[String] must contain("Alguien")
+      }
+    }
+
     "GET no funciona con otras rutas" in {
       Get("/kermit/1") ~> myRoute ~> check {
         handled must beFalse
