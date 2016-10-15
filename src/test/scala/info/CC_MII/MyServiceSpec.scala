@@ -19,14 +19,14 @@ class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSup
       }
     }
 
-    "leave GET requests to other paths unhandled" in {
+    "GET no funciona con otras rutas" in {
       Get("/kermit") ~> myRoute ~> check {
         handled must beFalse
       }
     }
 
-    "return a MethodNotAllowed error for PUT requests to the root path" in {
-      Put() ~> sealRoute(myRoute) ~> check {
+    "return a MethodNotAllowed error for POST requests to the root path" in {
+      Post() ~> sealRoute(myRoute) ~> check {
         status === MethodNotAllowed
         responseAs[String] === "HTTP method not allowed, supported methods: GET"
       }
