@@ -42,14 +42,6 @@ class MyServiceActor extends Actor with MyService {
   // or timeout handling
   def receive = runRoute(myRoute)
 
-  // Cada servidor lleva una porra
-  private val apuestas = scala.collection.mutable.Map[String, Apuesta]()
-
-  // Añade nueva apuesta
-  def add( apuesta: Apuesta ): Apuesta = {
-    this.apuestas += ( apuesta.quien -> apuesta )
-    return apuesta
-  }
 }
 
 
@@ -58,6 +50,15 @@ trait MyService extends HttpService {
 
   import MasterJsonProtocol._
   import spray.httpx.SprayJsonSupport._
+
+  // Cada servidor lleva una porra
+  private val apuestas = scala.collection.mutable.Map[String, Apuesta]()
+
+  // Añade nueva apuesta
+  def add( apuesta: Apuesta ): Apuesta = {
+    this.apuestas += ( apuesta.quien -> apuesta )
+    return apuesta
+  }
 
   val myRoute =
     pathSingleSlash {
@@ -68,6 +69,7 @@ trait MyService extends HttpService {
   path( IntNumber / IntNumber / Segment ) { (local,visitante,quien) =>
     put {
       val apuesta = new Apuesta(local,visitante,quien)
+      this.add( apuesta )
       complete( apuesta )
     } 
   }
