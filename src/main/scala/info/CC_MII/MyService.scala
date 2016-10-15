@@ -2,7 +2,7 @@ package info.CC_MII
 
 import scala.collection.mutable.Map
 
-import akka.actor.Actor
+import akka.actor._
 
 import spray.routing._
 import spray.http._
@@ -82,7 +82,7 @@ trait MyService extends HttpService {
   } ~
   path( Segment ) { quien =>
     get {
-      println( Apuestas)
+      Thread.sleep(100) // Se necesita para acceso a estado global
       val esta_apuesta = Apuestas.get( quien )
       complete( esta_apuesta )
     } 
