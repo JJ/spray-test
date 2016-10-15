@@ -76,14 +76,11 @@ trait MyService extends HttpService {
     put {
       val apuesta = new Apuesta(local,visitante,quien)
       Apuestas.add( apuesta )
-      println( apuesta )
-      println( Apuestas )
       complete( apuesta )
     } 
   } ~
   path( Segment ) { quien =>
     get {
-      println( Apuestas )
       val esta_apuesta = Apuestas.get( quien )
       complete( esta_apuesta )
     } 
