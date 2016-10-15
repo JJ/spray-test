@@ -30,17 +30,18 @@ object MasterJsonProtocol extends DefaultJsonProtocol {
 
 // Declara objeto global para las apuestas
 object Apuestas {
-  val apuestas = collection.mutable.Map[String,Apuesta]()
+  private val apuestas = collection.mutable.Map[String,Apuesta]()
 
   // Añade nueva apuesta
   def add( apuesta: Apuesta ): Apuesta = {
-    this.apuestas += ( apuesta.quien -> apuesta )
+    apuestas += ( apuesta.quien -> apuesta )
     return apuesta
   }
 
   // Recupera apuesta
-  def get( apuesta: String ): Apuesta = {
-    return apuestas( apuesta )
+  def get( quien: String ): Apuesta = {
+//    println( apuestas.keySet )
+    return apuestas( quien )
   }
 }
 
@@ -69,7 +70,7 @@ trait MyService extends HttpService {
   val myRoute =
     pathSingleSlash {
       get {
-        complete ( "routes" -> "get,post")
+        complete ( "routes" -> "get,put")
       }  
     } ~
   path( IntNumber / IntNumber / Segment ) { (local,visitante,quien) =>
@@ -81,6 +82,7 @@ trait MyService extends HttpService {
   } ~
   path( Segment ) { quien =>
     get {
+      println( Apuestas)
       val esta_apuesta = Apuestas.get( quien )
       complete( esta_apuesta )
     } 

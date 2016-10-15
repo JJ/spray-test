@@ -18,17 +18,15 @@ class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSup
       }
     }
 
-    "Crea apuesta correctamente" in {
+    "Crea apuestas correctamente" in {
       Put( "/0/2/Alguien") ~> myRoute ~> check {
 	response.entity should not be equalTo(None)
 	responseAs[String] must contain("Alguien")
       }
-    }
 
-    "GET recupera apuesta correctamente" in {
-      Get("/Alguien") ~> myRoute ~> check {
+       Put( "/3/0/Menda") ~> myRoute ~> check {
 	response.entity should not be equalTo(None)
-	responseAs[String] must contain("Alguien")
+	responseAs[String] must contain("Menda")
       }
     }
 
@@ -42,6 +40,13 @@ class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSup
       Post() ~> sealRoute(myRoute) ~> check {
         status === MethodNotAllowed
         responseAs[String] === "HTTP method not allowed, supported methods: GET"
+      }
+    }
+
+    "GET recupera apuesta correctamente" in {
+      Get("/Alguien") ~> myRoute ~> check {
+	response.entity should not be equalTo(None)
+	responseAs[String] must contain("Alguien")
       }
     }
   }
