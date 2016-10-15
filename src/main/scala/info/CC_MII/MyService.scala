@@ -72,6 +72,12 @@ trait MyService extends HttpService {
       this.add( apuesta )
       complete( apuesta )
     } 
+  } ~
+  path( Segment ) { (quien) =>
+    get {
+      val esta_apuesta = this.apuestas( quien )
+      complete( esta_apuesta )
+    } 
   }
   
 }

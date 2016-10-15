@@ -27,7 +27,7 @@ class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSup
     }
 
     "GET no funciona con otras rutas" in {
-      Get("/kermit") ~> myRoute ~> check {
+      Get("/kermit/1") ~> myRoute ~> check {
         handled must beFalse
       }
     }
