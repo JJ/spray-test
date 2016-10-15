@@ -11,7 +11,6 @@ class MyServiceSpec extends Specification with Specs2RouteTest with SprayJsonSup
   
   "MyService" should {
 
-
     "Devuelve lista de rutas en JSON" in {
       Get() ~> myRoute ~> check {
 	response.entity should not be equalTo(None)
