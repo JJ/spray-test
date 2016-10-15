@@ -44,6 +44,12 @@ class MyServiceActor extends Actor with MyService {
 
   // Cada servidor lleva una porra
   private val apuestas = scala.collection.mutable.Map[String, Apuesta]()
+
+  // Añade nueva apuesta
+  def add( apuesta: Apuesta ): Apuesta = {
+    this.apuestas += ( apuesta.quien -> apuesta )
+    return apuesta
+  }
 }
 
 
