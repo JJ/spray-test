@@ -62,9 +62,11 @@ class MyServiceActor extends Actor with MyService {
 trait MyService extends HttpService {
 
   val myRoute =
-    get {
-      pathSingleSlash {
+    pathSingleSlash {
+      get {
+
         complete ( "routes" -> "get,post")
       }
-    }
+    } 
+
 }
