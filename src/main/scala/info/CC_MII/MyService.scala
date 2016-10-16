@@ -30,19 +30,24 @@ object MasterJsonProtocol extends DefaultJsonProtocol {
 
 // Declara objeto global para las apuestas
 object Apuestas {
-  private val apuestas = collection.mutable.Map[String,Apuesta]()
+  private[this] val apuestas = collection.mutable.Map[String,Apuesta]()
 
   // Añade nueva apuesta
   def add( apuesta: Apuesta ): Apuesta = {
     apuestas += ( apuesta.quien -> apuesta )
-    return apuesta
+    apuesta
   }
 
   // Recupera apuesta
   def get( quien: String ): Apuesta = {
-//    println( apuestas.keySet )
-    return apuestas( quien )
+    apuestas( quien )
   }
+
+  // Recupera todas las apuestas
+  def getAll(): collection.immutable.Map[String,Apuesta] = {
+    return apuestas.toMap
+  }
+
 }
 
 // we don't implement our route structure directly in the service actor because
@@ -82,7 +87,7 @@ trait MyService extends HttpService {
   } ~
   path( Segment ) { quien =>
     get {
-      Thread.sleep(100) // Se necesita para acceso a estado global
+      println(Apuestas)
       val esta_apuesta = Apuestas.get( quien )
       complete( esta_apuesta )
     } 
