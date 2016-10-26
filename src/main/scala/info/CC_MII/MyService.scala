@@ -12,12 +12,11 @@ import spray.json.DefaultJsonProtocol._
 import spray.httpx.SprayJsonSupport
 import spray.httpx.SprayJsonSupport._
 
-
 import MediaTypes._
 
 import info.CC_MII._
 
-import DefaultJsonProtocol._ 
+import DefaultJsonProtocol._
 
 case class Apuesta( var local:Int, var visitante: Int, var quien: String ) {
   override def toString = s"$quien: $local-$visitante"
@@ -45,7 +44,7 @@ object Apuestas {
 
   // Recupera todas las apuestas
   def getAll(): collection.immutable.Map[String,Apuesta] = {
-    return apuestas.toMap
+    apuestas.toMap
   }
 
 }
@@ -62,9 +61,7 @@ class MyServiceActor extends Actor with MyService {
   // other things here, like request stream processing
   // or timeout handling
   def receive = runRoute(myRoute)
-
 }
-
 
 // this trait defines our service behavior independently from the service actor
 trait MyService extends HttpService {
@@ -76,21 +73,23 @@ trait MyService extends HttpService {
     pathSingleSlash {
       get {
         complete ( "routes" -> "get,put")
-      }  
+      }
     } ~
-  path( IntNumber / IntNumber / Segment ) { (local,visitante,quien) =>
-    put {
-      val apuesta = new Apuesta(local,visitante,quien)
-      Apuestas.add( apuesta )
-      complete( apuesta )
-    } 
-  } ~
+    path( IntNumber / IntNumber / Segment ) { (local,visitante,quien) =>
+      put {
+        complete {
+          val apuesta = Apuesta(local, visitante, quien)
+          Apuestas.add(apuesta)
+          println(Apuestas.getAll)
+          apuesta
+        }
+      }
+    } ~
   path( Segment ) { quien =>
     get {
-      println(Apuestas)
-      val esta_apuesta = Apuestas.get( quien )
-      complete( esta_apuesta )
-    } 
+      complete{Apuestas.get(quien)
+      }
+    }
   }
-  
+
 }
