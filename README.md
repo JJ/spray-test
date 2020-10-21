@@ -1,6 +1,6 @@
 ## ejemplo de uso de _spray_ Template Project
 
-Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3
+Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3 + openjdk 1.8
 
 
 Follow these steps to get started:
