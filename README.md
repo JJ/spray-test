@@ -1,6 +1,6 @@
 ## ejemplo de uso de _spray_ Template Project
 
-Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3
+Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3 + openjdk 1.8
 
 Al final, una pérdida de tiempo. Ni se usa ya spray ni puede usar lo
 que yo creo que quiere usar. El tema de persistencia es complicado en
