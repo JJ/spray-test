@@ -2,6 +2,9 @@
 
 Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3
 
+Al final, una pérdida de tiempo. Ni se usa ya spray ni puede usar lo
+que yo creo que quiere usar. El tema de persistencia es complicado en
+lenguajes concurrentes y tendré que mirar más sobre el tema.
 
 Follow these steps to get started:
 
