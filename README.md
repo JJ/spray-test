@@ -1,6 +1,11 @@
-## ejemplo de uso de _spray_ Template Project
+## ejemplo de uso de _spray_ a partir del *Template Project*
 
-Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3 + openjdk 1.8
+Este proyecto usa Scala 2.11 + Akka 2.3 + spray 1.3 + openjdk 1.8.
+
+## DEPRECATION NOTICE
+
+No intentes que funcione, ya que spray.ok lleva sin ningún tipo de
+desarrollo desde hace 4 años. 
 
 Al final, una pérdida de tiempo. Ni se usa ya spray ni puede usar lo
 que yo creo que quiere usar. El tema de persistencia es complicado en
